@@ -41,7 +41,7 @@ var scraping_js_1 = require("./scraping.js");
 var captcha_js_1 = require("./captcha.js");
 var serverRequest_js_1 = require("./serverRequest.js");
 var db_js_1 = require("./db.js");
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 5000;
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
@@ -91,10 +91,15 @@ var searchVat = function run(vat, res) {
     });
 };
 app.use(express.static('public/client'));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text({ extended: true }));
 app.post('/', function (req, res) {
-    console.log(req.body.vat);
-    searchVat(req.body.vat, res);
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            console.log(req.body);
+            searchVat(req.body, res);
+            return [2 /*return*/];
+        });
+    });
 });
 app.listen(PORT, function () {
     console.log("Example app listening");

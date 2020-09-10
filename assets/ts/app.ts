@@ -4,7 +4,7 @@ import {Captcha} from './captcha.js';
 import {ServerRequest} from './serverRequest.js';
 import {mongoDB} from './db.js';
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -43,11 +43,11 @@ const searchVat = async function run(vat,res) {
 }
 
 	app.use(express.static('public/client'));
-	app.use(bodyParser.urlencoded({ extended: true }));
-	app.post('/', function (req, res) {
-		console.log(req.body.vat);
-		searchVat(req.body.vat,res);
-  });
+	app.use(bodyParser.text({ extended: true }));
+	app.post('/', async function (req, res) {
+		console.log(req.body);
+		searchVat(req.body,res);
+    });
 
     app.listen(PORT, () => {
   		console.log(`Example app listening`)

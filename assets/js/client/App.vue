@@ -28,9 +28,13 @@ export default {
         },
 	methods: {
 		searchVat() {
-			axios.post('/', this.search)
+			axios.post('/',this.search,{
+				headers: {
+	        		'Content-Type': 'text/plain'
+	    		}
+			})
 			.then(function (response) {
-				console.log(response);
+				
 			});
 		}
 	}

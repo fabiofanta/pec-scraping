@@ -2074,7 +2074,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     searchVat: function searchVat() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/', this.search).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/', this.search, {
+        headers: {
+          'Content-Type': 'text/plain'
+        }
+      }).then(function (response) {
         console.log(response);
       });
     }
