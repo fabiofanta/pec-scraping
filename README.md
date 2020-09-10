@@ -27,8 +27,10 @@ Copy, rename (dbInput.js) and fill (MongoDB Atlas NodeJS credentials) dbInput-ex
 $ cp dbInput-example.js dbInput.js
 ```
 
+## Run
+
 Run app with Heroku:
--Install Heroku --> https://devcenter.heroku.com/articles/heroku-cli;
+--> Install Heroku --> https://devcenter.heroku.com/articles/heroku-cli;
 
 Run locally with heroku local:
 
@@ -38,7 +40,18 @@ $ heroku local web
 -Browser localhost:5000
 
 Run app backend with NodeJS:
--From project Root:
+
+First put manually VAT Code instead of 'req.body' inside public/js/app.js
+
+```js
+// express server iterations
+app.use(express.static('public/client'));
+app.use(bodyParser.text({ extended: true }));
+app.post('/', function (req, res) {
+    searchVat(req.body, res);
+});
+```
+--> then -> From project Root:
 
 ```bash
 $ node public/js/app.js
