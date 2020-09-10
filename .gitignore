@@ -1,3 +1,4 @@
 /node_modules
 /public/client/node_modules
 .env.js
+/assets/js/dbInput.js

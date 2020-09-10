@@ -2078,9 +2078,7 @@ __webpack_require__.r(__webpack_exports__);
         headers: {
           'Content-Type': 'text/plain'
         }
-      }).then(function (response) {
-        console.log(response);
-      });
+      }).then(function (response) {});
     }
   }
 });

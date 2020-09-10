@@ -39,7 +39,7 @@ const searchVat = async function run(vat,res) {
 
 		res.send(response);
 
- 	}, 80000);
+ 	}, 100000);
 }
 
 	app.use(express.static('public/client'));

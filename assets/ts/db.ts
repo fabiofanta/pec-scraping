@@ -2,14 +2,9 @@
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
-// Connection URL
-const url = 'mongodb+srv://fanta:OPhRGXF2IfNiPzDs@cluster0.6odhj.mongodb.net/PECScraping?retryWrites=true&w=majority';
+// Connection URL Database Name Database Collection
 
-// Database Name
-const dbName = 'PECScraping';
-
-// Database Collection
-const collection = 'pecEmails';
+const dbConfig = require('../../assets/js/dbInput');
 
 
 class Database {
@@ -42,7 +37,7 @@ class Database {
     }
 }
 
-const mongoDB = new Database (url,dbName,collection);
+const mongoDB = new Database (dbConfig.url,dbConfig.dbName,dbConfig.collection);
 
 
 export {mongoDB};

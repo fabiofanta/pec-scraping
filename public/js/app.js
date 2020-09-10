@@ -84,7 +84,7 @@ var searchVat = function run(vat, res) {
                                 }
                             });
                         });
-                    }, 80000);
+                    }, 100000);
                     return [2 /*return*/];
             }
         });

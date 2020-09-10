@@ -4,12 +4,8 @@ exports.mongoDB = void 0;
 // import dependencies
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
-// Connection URL
-var url = 'mongodb+srv://fanta:OPhRGXF2IfNiPzDs@cluster0.6odhj.mongodb.net/PECScraping?retryWrites=true&w=majority';
-// Database Name
-var dbName = 'PECScraping';
-// Database Collection
-var collection = 'pecEmails';
+// Connection URL Database Name Database Collection
+var dbConfig = require('../../assets/js/dbInput');
 var Database = /** @class */ (function () {
     function Database(dbUrl, dbName, collection) {
         this.dbUrl = dbUrl;
@@ -33,5 +29,5 @@ var Database = /** @class */ (function () {
     };
     return Database;
 }());
-var mongoDB = new Database(url, dbName, collection);
+var mongoDB = new Database(dbConfig.url, dbConfig.dbName, dbConfig.collection);
 exports.mongoDB = mongoDB;
