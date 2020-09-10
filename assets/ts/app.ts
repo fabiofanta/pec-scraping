@@ -39,12 +39,12 @@ const searchVat = async function run(vat,res) {
 
 		res.send(response);
 
- 	}, 100000);
+ 	}, 29000);
 }
 
 	app.use(express.static('public/client'));
 	app.use(bodyParser.text({ extended: true }));
-	app.post('/', async function (req, res) {
+	app.post('/', function (req, res) {
 		console.log(req.body);
 		searchVat(req.body,res);
     });

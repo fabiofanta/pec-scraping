@@ -92,14 +92,17 @@ var searchVat = function run(vat, res) {
 };
 app.use(express.static('public/client'));
 app.use(bodyParser.text({ extended: true }));
+// const puzza = app.post('/', function (req, res) {
+// 		console.log(req.body);
+// 		// const payload = {'business': 'business','PEC':'pec','vatCode': 'vat'};
+// 		// searchVat(req.body,res);
+// 		res.append('Content-Type','text/plain')
+// 		res.append('Access-Control-Allow-Origin','*')
+// 		res.close();
+// 	});
 app.post('/', function (req, res) {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            console.log(req.body);
-            searchVat(req.body, res);
-            return [2 /*return*/];
-        });
-    });
+    console.log(req.body);
+    searchVat(req.body, res);
 });
 app.listen(PORT, function () {
     console.log("Example app listening");

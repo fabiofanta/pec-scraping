@@ -61,7 +61,7 @@ var ServerRequest = /** @class */ (function () {
                         business = $('.portlet-body .header-title').text().trim();
                         pec = $('.aui-field-wrapper-content').contents().get(0).next.next.data;
                         console.log(pec);
-                        payload = { 'business': business, 'PEC': pec, 'vatCode': vat };
+                        payload = { 'business': business, 'pec': pec, 'vatCode': vat };
                         return [2 /*return*/, payload];
                     case 2:
                         error_1 = _a.sent();

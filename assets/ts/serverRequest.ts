@@ -25,7 +25,7 @@ class ServerRequest {
 			const business = $('.portlet-body .header-title').text().trim();
 			const pec = $('.aui-field-wrapper-content').contents().get(0).next.next.data;
 			console.log(pec);
-			const payload = {'business': business,'PEC':pec,'vatCode': vat};
+			const payload = {'business': business,'pec':pec,'vatCode': vat};
 			return payload
 		}
 		catch(error) {

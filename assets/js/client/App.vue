@@ -13,6 +13,12 @@
 				<button type="submit" class="btn btn-primary">Search</button>
 			</form>
 		</section>
+		<section class="container mt-5">
+			<div v-if="spin === true" class="spinner-border"></div>
+			<div v-else-if="justmounted === false" class="alert alert-success" role="alert">
+			 		{{ payload }}
+			</div>
+		</section>
 	</section>
 </template>
 
@@ -23,18 +29,31 @@ import axios from 'axios';
 export default {
 	data() {
             return {
-                search: ''
+                search: '',
+				payload: '',
+				spin: false,
+				justmounted:true
             }
         },
 	methods: {
 		searchVat() {
+			var self = this;
+			if (self.spin === false ) {
+				self.spin = true;
+				self.justmounted = true;
+			}
 			axios.post('/',this.search,{
 				headers: {
-	        		'Content-Type': 'text/plain'
+	        		'Content-Type': 'text/plain',
+					'X-Requested-With': 'XMLHttpRequest'
 	    		}
 			})
 			.then(function (response) {
-				
+				console.log(response);
+				self.payload = response.data.pec;
+				self.spin = false;
+				self.justmounted = false;
+
 			});
 		}
 	}

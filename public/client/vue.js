@@ -2065,20 +2065,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      search: ''
+      search: '',
+      payload: '',
+      spin: false,
+      justmounted: true
     };
   },
   methods: {
     searchVat: function searchVat() {
+      var self = this;
+
+      if (self.spin === false) {
+        self.spin = true;
+        self.justmounted = true;
+      }
+
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/', this.search, {
         headers: {
-          'Content-Type': 'text/plain'
+          'Content-Type': 'text/plain',
+          'X-Requested-With': 'XMLHttpRequest'
         }
-      }).then(function (response) {});
+      }).then(function (response) {
+        console.log(response);
+        self.payload = response.data.pec;
+        self.spin = false;
+        self.justmounted = false;
+      });
     }
   }
 });
@@ -3276,6 +3298,18 @@ var render = function() {
           )
         ]
       )
+    ]),
+    _vm._v(" "),
+    _c("section", { staticClass: "container mt-5" }, [
+      _vm.spin === true
+        ? _c("div", { staticClass: "spinner-border" })
+        : _vm.justmounted === false
+        ? _c(
+            "div",
+            { staticClass: "alert alert-success", attrs: { role: "alert" } },
+            [_vm._v("\n\t\t \t\t" + _vm._s(_vm.payload) + "\n\t\t")]
+          )
+        : _vm._e()
     ])
   ])
 }
