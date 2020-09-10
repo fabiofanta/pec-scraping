@@ -8,9 +8,9 @@
 				<div class="form-group">
 					<label for="vatInput">VAT Code</label>
 						<input v-model= "search" type="text" name="vat" class="form-control" id="vatInput" aria-describedby="vatInput" placeholder="Enter VAT Code">
-						<small id="vatInput" class="form-text text-muted">Insert VAT Code</small>
+						<small id="vatInput" class="form-text text-muted">Insert VAT Code, without letters. Wait 30 seconds</small>
 				</div>
-				<button type="submit" class="btn btn-primary">Search</button>
+				<button v-if="spin === false" type="submit" class="btn btn-primary">Search</button>
 			</form>
 		</section>
 		<section class="container mt-5">

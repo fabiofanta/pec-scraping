@@ -41,16 +41,30 @@ var scraping_js_1 = require("./scraping.js");
 var captcha_js_1 = require("./captcha.js");
 var serverRequest_js_1 = require("./serverRequest.js");
 var db_js_1 = require("./db.js");
-var PORT = process.env.PORT || 5000;
 var express = require('express');
 var bodyParser = require('body-parser');
+var PORT = process.env.PORT || 5000;
+// express.js
 var app = express();
 var http = require('http');
 var server = http.Server(app);
+// config parameters
 var parameters = require('../../.env');
 var headers = require('../../assets/js/headers');
-var scrap = new scraping_js_1.Scraping('https://www.inipec.gov.it/cerca-pec/-/pecs/companies');
-var captcha = new captcha_js_1.Captcha('https://2captcha.com/in.php', parameters);
+var appConfig = require('../../assets/js/config');
+// objects instances
+var scrap = new scraping_js_1.Scraping(appConfig.urlScrapSite);
+var captcha = new captcha_js_1.Captcha(appConfig.captchaServiceUrl, parameters);
+// express server iterations
+app.use(express.static('public/client'));
+app.use(bodyParser.text({ extended: true }));
+app.post('/', function (req, res) {
+    console.log(req.body);
+    searchVat(req.body, res);
+});
+app.listen(PORT, function () {
+    console.log("Example app listening");
+});
 var searchVat = function run(vat, res) {
     return __awaiter(this, void 0, void 0, function () {
         var html, head, captchaInit;
@@ -65,45 +79,38 @@ var searchVat = function run(vat, res) {
                     captchaInit = _a.sent();
                     setTimeout(function () {
                         return __awaiter(this, void 0, void 0, function () {
-                            var token, payload, server, response;
+                            var token, payload, server_1, response;
                             return __generator(this, function (_a) {
                                 switch (_a.label) {
                                     case 0: return [4 /*yield*/, captcha.resolveCaptcha(captchaInit)];
                                     case 1:
                                         token = _a.sent();
-                                        payload = '_1_WAR_searchpecsportlet_formDate=' + html.formDate + '&_1_WAR_searchpecsportlet_tabSelected=companies&_1_WAR_searchpecsportlet_company-name=&_1_WAR_searchpecsportlet_regionCode=&_1_WAR_searchpecsportlet_tax-code-vat=' + vat + '&_1_WAR_searchpecsportlet_email-address=&g-recaptcha-response=' + token + '&_1_WAR_searchpecsportlet_g-recaptcha-response=';
-                                        console.log(payload);
-                                        server = new serverRequest_js_1.ServerRequest(head, payload, html.authUrl);
-                                        return [4 /*yield*/, server.postData(vat)];
+                                        console.log(token);
+                                        if (!(token !== 'CAPCHA_NOT_READY')) return [3 /*break*/, 3];
+                                        payload = appConfig.urlScrapPost.formDateString + html.formDate + appConfig.urlScrapPost.bodyString + vat + appConfig.urlScrapPost.emailRecaptcha + token + appConfig.urlScrapPost.gRecaptcha;
+                                        server_1 = new serverRequest_js_1.ServerRequest(head, payload, html.authUrl);
+                                        return [4 /*yield*/, server_1.postData(vat)];
                                     case 2:
                                         response = _a.sent();
-                                        console.log(response);
-                                        db_js_1.mongoDB.insertDocuments(response);
-                                        res.send(response);
-                                        return [2 /*return*/];
+                                        if (response !== undefined) {
+                                            db_js_1.mongoDB.insertDocuments(response);
+                                            res.send(response);
+                                        }
+                                        else {
+                                            res.send({ pec: 'Vat Code not in database or not valid, try removing letters' });
+                                        }
+                                        ;
+                                        return [3 /*break*/, 4];
+                                    case 3:
+                                        res.send({ pec: 'Captcha not ready, retry in 10 seconds ' });
+                                        _a.label = 4;
+                                    case 4: return [2 /*return*/];
                                 }
                             });
                         });
-                    }, 100000);
+                    }, 28000);
                     return [2 /*return*/];
             }
         });
     });
 };
-app.use(express.static('public/client'));
-app.use(bodyParser.text({ extended: true }));
-// const puzza = app.post('/', function (req, res) {
-// 		console.log(req.body);
-// 		// const payload = {'business': 'business','PEC':'pec','vatCode': 'vat'};
-// 		// searchVat(req.body,res);
-// 		res.append('Content-Type','text/plain')
-// 		res.append('Access-Control-Allow-Origin','*')
-// 		res.close();
-// 	});
-app.post('/', function (req, res) {
-    console.log(req.body);
-    searchVat(req.body, res);
-});
-app.listen(PORT, function () {
-    console.log("Example app listening");
-});

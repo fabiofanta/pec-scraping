@@ -3287,15 +3287,17 @@ var render = function() {
                 staticClass: "form-text text-muted",
                 attrs: { id: "vatInput" }
               },
-              [_vm._v("Insert VAT Code")]
+              [_vm._v("Insert VAT Code, without letters")]
             )
           ]),
           _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-            [_vm._v("Search")]
-          )
+          _vm.spin === false
+            ? _c(
+                "button",
+                { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+                [_vm._v("Search")]
+              )
+            : _vm._e()
         ]
       )
     ]),
