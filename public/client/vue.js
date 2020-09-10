@@ -3325,7 +3325,7 @@ var staticRenderFns = [
       { staticClass: "navbar navbar-expand-lg navbar-dark bg-primary" },
       [
         _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
-          _vm._v("PECScraping")
+          _vm._v("PECFinder")
         ])
       ]
     )

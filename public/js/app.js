@@ -59,7 +59,6 @@ var captcha = new captcha_js_1.Captcha(appConfig.captchaServiceUrl, parameters);
 app.use(express.static('public/client'));
 app.use(bodyParser.text({ extended: true }));
 app.post('/', function (req, res) {
-    console.log(req.body);
     searchVat(req.body, res);
 });
 app.listen(PORT, function () {

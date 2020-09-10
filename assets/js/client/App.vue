@@ -1,7 +1,7 @@
 <template>
 	<section>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-			<a class="navbar-brand" href="#">PECScraping</a>
+			<a class="navbar-brand" href="#">PECFinder</a>
 		</nav>
 		<section class="container mt-5">
 			<form  @submit.prevent= "searchVat()" >
@@ -53,7 +53,6 @@ export default {
 				self.payload = response.data.pec;
 				self.spin = false;
 				self.justmounted = false;
-
 			});
 		}
 	}
