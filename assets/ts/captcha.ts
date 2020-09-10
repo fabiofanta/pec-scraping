@@ -20,7 +20,6 @@ class Captcha {
 
 	async resolveCaptcha(captchaInit) {
 		const response = await axios.get('https://2captcha.com/res.php?key='+ parameters.key +'&action=get&id=' + captchaInit.data.request + '&json=1');
-		console.log(response.data.request);
 
 		return response.data.request
 	}

@@ -85,7 +85,6 @@ var searchVat = function run(vat, res) {
                                     case 0: return [4 /*yield*/, captcha.resolveCaptcha(captchaInit)];
                                     case 1:
                                         token = _a.sent();
-                                        console.log(token);
                                         if (!(token !== 'CAPCHA_NOT_READY')) return [3 /*break*/, 3];
                                         payload = appConfig.urlScrapPost.formDateString + html.formDate + appConfig.urlScrapPost.bodyString + vat + appConfig.urlScrapPost.emailRecaptcha + token + appConfig.urlScrapPost.gRecaptcha;
                                         server_1 = new serverRequest_js_1.ServerRequest(head, payload, html.authUrl);

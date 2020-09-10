@@ -66,7 +66,6 @@ var Captcha = /** @class */ (function () {
                     case 0: return [4 /*yield*/, axios_1["default"].get('https://2captcha.com/res.php?key=' + parameters.key + '&action=get&id=' + captchaInit.data.request + '&json=1')];
                     case 1:
                         response = _a.sent();
-                        console.log(response.data.request);
                         return [2 /*return*/, response.data.request];
                 }
             });

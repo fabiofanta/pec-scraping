@@ -3287,7 +3287,7 @@ var render = function() {
                 staticClass: "form-text text-muted",
                 attrs: { id: "vatInput" }
               },
-              [_vm._v("Insert VAT Code, without letters")]
+              [_vm._v("Insert VAT Code, without letters. Wait 30 seconds")]
             )
           ]),
           _vm._v(" "),
