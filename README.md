@@ -57,3 +57,6 @@ app.post('/', function (req, res) {
 ```bash
 $ node public/js/app.js
 ```
+
+## Warning
+2captcha API takes up to 100.000ms to response, Heroku puts a 30.000ms timeout on HTTP calls. It can cause captcha not resolved issue.
